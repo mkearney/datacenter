@@ -1,0 +1,21 @@
+Package: datacenter
+Type: Package
+Title: Create, Add, and Update Centralized Data
+Version: 0.0.1
+Authors@R: c(
+    person("Michael W.", "Kearney", ,
+    email = "kearneymw@missouri.edu", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0002-0730-4694"))
+    )
+Description: An 'R6' class for centralizing data. The datacenter object enables
+    memory-efficient joining, binding, and updating (e.g., replacing missing 
+    values) of id-anchored data sets. This is especially useful when variable 
+    values for the same observations are spread across several different data 
+    sets.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    R6,
+    tibble
+RoxygenNote: 6.1.1
