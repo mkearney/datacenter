@@ -48,6 +48,7 @@ new_datacenter <- function(vars) {
 
 dc_initialize <- function(...) invisible(self)
 
+#' Add method: only adds observations (rows); doesn't update values
 dc_add <- function(...) {
   dots <- elps(...)
   dots <- dots[names(dots) %in% self$.vars]
@@ -62,10 +63,11 @@ dc_add <- function(...) {
   invisible(self)
 }
 
+#' Update method: only updates values; doesn't add observations (rows)
 dc_update <- function(...) {
   dots <- elps(...)
   dots <- dots[names(dots) %in% self$.vars]
-  dots <- dplyr::filter(dots, id %in% self$id, !duplicated(id))
+  dots <- dots[dots$id %in% self$id & !duplicated(dots$id), ]
   w <- match(dots$id, self$id)
   for (i in names(dots)) {
     self[[i]][w][is.na(self[[i]][w])] <- dots[[i]][is.na(self[[i]][w])]
@@ -81,6 +83,7 @@ dc_format <- function(...) {
   )
 }
 
+#' Filters out duplicates
 dc_validate <- function() {
   dups <- duplicated(self$id)
   for (i in self$.vars) {
@@ -88,6 +91,7 @@ dc_validate <- function() {
   }
   invisible(self)
 }
+
 
 #' @export
 as.data.frame.Datacenter <- function(x) {
