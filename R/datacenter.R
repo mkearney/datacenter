@@ -33,7 +33,7 @@ new_datacenter <- function(vars) {
   }
   ## add id var if not already
   .vars <- unique(c("id", names(vars)))
-  if ("id" %!H% vars) {
+  if (!has_var(vars, "id")) {
     vars$id <- rep(NA_character_, nrow(vars))
   }
   ## set public vars
